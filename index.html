@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Potongan WD</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif,Helvetica,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(180deg,#531249,#dd64c9,#dd64c9);
+}
+
+.container{
+    width:100%;
+    max-width:420px;
+    padding:20px;
+}
+
+.header{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.logo{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#f33bc5,#f33bc5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#f53df5;
+    font-size:26px;
+    box-shadow:0 0 20px rgb(255, 255, 255);
+}
+
+.header h2{
+    color:rgb(252, 184, 240);
+    font-size:34px;
+    font-weight:bold;
+}
+
+.card{
+    background:#111b31;
+    border-radius:22px;
+    padding:22px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
+
+input{
+    width:100%;
+    height:55px;
+    border:none;
+    outline:none;
+    background:#20273d;
+    border-radius:14px;
+    color:white;
+    font-size:26px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.result{
+    margin-top:22px;
+    background:#181f33;
+    border-radius:18px;
+    padding:25px;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.label{
+    color:#98a3ba;
+    text-align:center;
+    font-size:13px;
+    letter-spacing:2px;
+}
+
+#hasil{
+    margin-top:12px;
+    text-align:center;
+    color:#ea47d4;
+    font-size:40px;
+    font-weight:bold;
+    text-shadow:0 0 15px rgba(71,234,135,.35);
+}
+
+.btn-group{
+    margin-top:25px;
+    display:flex;
+    gap:12px;
+}
+
+button{
+    flex:1;
+    height:48px;
+    border:none;
+    border-radius:12px;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.copy{
+    background:linear-gradient(90deg,#2f6dff,#d817c8);
+}
+
+.reset{
+    background:linear-gradient(90deg,#d817c8,#1ec7d4);
+}
+
+@media(max-width:480px){
+
+.header h2{
+    font-size:28px;
+}
+
+#hasil{
+    font-size:34px;
+}
+
+input{
+    font-size:22px;
+}
+
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+<div class="logo">🫶</div>
+<h2>POTONGAN WD YA BEB</h2>
+</div>
+
+<div class="card">
+
+<input
+id="nominal"
+type="text"
+placeholder="Masukkan Nominal"
+oninput="formatInput(this); hitung();">
+
+<div class="result">
+
+<div class="label">
+HASIL SETELAH ADMIN
+</div>
+
+<div id="hasil">
+Rp 0
+</div>
+
+<div class="btn-group">
+
+<button class="copy" onclick="copyHasil()">
+❤️ Copy Hasil
+</button>
+
+<button class="reset" onclick="resetData()">
+❓ Reset
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function formatInput(input){
+
+let angka=input.value.replace(/\D/g,'');
+
+input.value=angka.replace(/\B(?=(\d{3})+(?!\d))/g,".");
+
+}
+
+function hitung(){
+
+let angka=document.getElementById("nominal").value.replace(/\./g,'');
+
+let nominal=parseInt(angka)||0;
+
+// Potongan Admin 2.500
+
+let hasil=nominal- 2500;
+
+document.getElementById("hasil").innerHTML=
+" "+hasil.toLocaleString("id-ID");
+
+}
+
+function copyHasil(){
+
+navigator.clipboard.writeText(
+document.getElementById("hasil").innerText
+);
+
+alert("Hasil berhasil disalin.");
+
+}
+
+function resetData(){
+
+document.getElementById("nominal").value="";
+document.getElementById("hasil").innerHTML="Rp 0";
+
+}
+
+</script>
+
+</body>
+</html>
